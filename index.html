@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Téléchargement | Ma Vie Étudiante</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            
+            // Lien vers tes apps
+            const androidLink = "https://play.google.com/store/apps/details?id=com.mtacorporation.vibly&hl=fr";
+            const iosLink = "https://apps.apple.com/fr/app/vibly/id1580285465";
+            const fallbackLink = "https://tonsite.com"; // Page d'accueil ou alternative
+            
+            let redirectUrl = fallbackLink; // Par défaut
+            
+            if (/android/i.test(userAgent)) {
+                redirectUrl = androidLink;
+            } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                redirectUrl = iosLink;
+            }
+
+            // Redirection après 1 seconde (évite les blocages navigateurs)
+            setTimeout(() => {
+                window.location.href = redirectUrl;
+            }, 1000);
+        });
+    </script>
+</head>
+<body>
+    <h1>Redirection en cours...</h1>
+    <p>Si la page ne se charge pas, <a id="manualLink" href="#">cliquez ici</a>.</p>
+
+    <script>
+        document.getElementById("manualLink").href = redirectUrl;
+    </script>
+</body>
+</html>
